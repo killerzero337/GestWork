@@ -1,0 +1,7 @@
+{
+  "name": "GestWork",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
