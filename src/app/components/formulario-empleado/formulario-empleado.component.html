@@ -1,0 +1,40 @@
+<form (ngSubmit)="guardarEmpleado()">
+  <ion-item>
+    <ion-label position="floating">Nombre:</ion-label>
+    <ion-input
+      type="text"
+      [(ngModel)]="empleadoForm.nombreCompleto"
+      name="nombreCompleto"
+      required
+    ></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="floating">DNI:</ion-label>
+    <ion-input
+      type="text"
+      [(ngModel)]="empleadoForm.dni"
+      name="dni"
+      required
+    ></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="floating">Teléfono:</ion-label>
+    <ion-input
+      type="text"
+      [(ngModel)]="empleadoForm.telefono"
+      name="telefono"
+      required
+    ></ion-input>
+  </ion-item>
+  <ion-item class="flex items-center justify-around">
+    <ion-label position="floating">Activo:</ion-label>
+    <ion-toggle type="checkbox" [(ngModel)]="empleadoForm.estado" name="estado"></ion-toggle>
+  </ion-item>
+
+  <ion-button expand="full" color="success" type="submit">
+    {{ empleadoForm.id ? "Editar Empleado" : "Añadir Empleado" }}
+  </ion-button>
+  <ion-button (click)="cancelarEmpleado()" expand="full" color="danger">
+    Cancelar
+  </ion-button>
+</form>

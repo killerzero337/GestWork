@@ -1,0 +1,41 @@
+.formulario {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80%;
+  max-width: 400px;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  z-index: 1000;
+  box-sizing: border-box;
+}
+
+@media (width < 768px) {
+  .formulario {
+    position: relative;
+     // Ajusta el ancho del formulario en dispositivos móviles
+  }
+
+  ion-menu-button {
+    --color: blue; /* Color del icono */
+    --background: transparent; /* Fondo transparente */
+    --border-radius: 50%; /* Hacerlo más redondeado */
+    --padding: 8px;
+    --box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.15);
+    font-size: 24px; /* Tamaño del icono */
+  
+    /* Efecto al pasar el mouse */
+    &:hover {
+      --background: rgba(255, 255, 255, 0.2);
+    }
+  
+    /* Ajustar tamaño en móviles */
+    @media (max-width: 768px) {
+      font-size: 28px;
+    }
+    
+  }
+}

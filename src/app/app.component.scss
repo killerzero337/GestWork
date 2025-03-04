@@ -117,3 +117,71 @@ ion-note {
 ion-item.selected {
   --color: var(--ion-color-primary);
 }
+
+/* Estilos para el menú */
+ion-menu {
+  --background: #f8f8f8; /* Fondo del menú */
+  --width: 250px; /* Ancho del menú */
+}
+
+/* Estilos de los elementos del menú */
+ion-item {
+  --background: transparent; /* Fondo transparente para los ítems */
+  --padding-start: 20px;
+  --padding-end: 20px;
+  --border-radius: 8px; /* Bordes redondeados */
+}
+
+/* Estilos cuando el ítem está seleccionado */
+ion-item[selected] {
+  --background: #e0e0e0; /* Color de fondo cuando el ítem está seleccionado */
+}
+
+/* Estilos del ícono */
+ion-icon {
+  color: #007aff; /* Color de los íconos */
+  font-size: 20px; /* Tamaño del ícono */
+}
+
+ion-router-outlet {
+  padding: 16px;
+  background-color: #ffffff; /* Fondo blanco */
+  min-height: 100vh; /* Asegura que el contenido ocupe toda la pantalla */
+}
+
+ion-list {
+  padding: 0;
+  margin: 0;
+  --background: #f4f4f4; /* Fondo de la lista */
+  --border-radius: 8px; /* Bordes redondeados para la lista */
+}
+
+/* Estilo para el encabezado de la lista */
+ion-list-header {
+  font-size: 20px;
+  color: #333;
+  font-weight: bold;
+  padding: 16px;
+  background-color: #85c0ff; /* Color de fondo para el encabezado */
+  color: #fff; /* Color del texto */
+  border-radius: 10px;
+}
+
+ion-note {
+  background-color: #85c0ff;
+  border-radius: 5px 5px 10px 10px;
+  flex-grow: 1;
+  color: #fff;
+  display: flex;
+}
+
+/* Estilos para el ítem de navegación */
+ion-menu-toggle ion-item {
+  transition: background-color 0.3s ease;
+}
+
+/* Efecto hover sobre el ítem */
+ion-menu-toggle ion-item:hover {
+  --background: #7ebdff; /* Cambio de color al pasar el mouse */
+  color: #fff; /* Cambiar color del texto cuando está seleccionado */
+}

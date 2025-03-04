@@ -1,0 +1,59 @@
+<form (ngSubmit)="guardarObra()">
+  <ion-item>
+    <ion-label position="floating">Titulo:</ion-label>
+    <ion-input
+      type="text"
+      [(ngModel)]="obraForm.titulo"
+      name="titulo"
+      required
+    ></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="floating">Localidad:</ion-label>
+    <ion-input
+      type="text"
+      [(ngModel)]="obraForm.localidad"
+      name="localidad"
+      required
+    ></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="floating">Dirección:</ion-label>
+    <ion-input
+      type="text"
+      [(ngModel)]="obraForm.direccion"
+      name="direccion"
+      required
+    ></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="floating">Nombre Completo del Cliente:</ion-label>
+    <ion-input
+      type="text"
+      [(ngModel)]="obraForm.nombreCompletoCliente"
+      name="nombreCompletoCliente"
+      required
+    ></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="floating">Teléfono:</ion-label>
+    <ion-input
+      type="text"
+      [(ngModel)]="obraForm.telefonoCliente"
+      name="telefonoCliente"
+      required
+    ></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="floating">Estado:</ion-label>
+    <ion-toggle
+      type="checkbox"
+      [(ngModel)]="obraForm.estado"
+      name="estado"
+    ></ion-toggle>
+  </ion-item>
+  <ion-button type="submit">{{
+    obraForm.id ? "Actualizar" : "Guardar"
+  }}</ion-button>
+  <ion-button (click)="cancelarObra()" color="danger">Cancelar</ion-button>
+</form>

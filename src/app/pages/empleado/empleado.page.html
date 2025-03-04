@@ -1,0 +1,110 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>    
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large" class="font-semibold">Obras</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <div
+    class="flex flex-col md:flex-row justify-between items-center p-4 space-y-3 md:space-y-0"
+  >
+    <ion-searchbar
+      [(ngModel)]="cadenaBusqueda"
+      (ionInput)="filtrarEmpleados()"
+      placeholder="Buscar empleados..."
+      class="shadow-md rounded-xl flex-1"
+    ></ion-searchbar>
+    <button
+      (click)="desplegarFormulario = !desplegarFormulario"
+      class="w-32 text-blue-500 px-4 py-2 rounded-lg transition duration-300 ease-in-out hover:bg-blue-500 hover:text-white"
+    >
+      {{ desplegarFormulario ? 'Cerrar Formulario' : 'Agregar' }}
+    </button>
+  </div>
+
+  <div class="p-4 mt-4 bg-gray-100 rounded-lg shadow-md">
+    <h3 class="text-lg font-semibold mb-3 text-gray-700">Filtros</h3>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <!-- Filtro por estado -->
+      <div class="flex flex-col">
+        <label class="mr-2 mb-2">Estado:</label>
+        <select
+          [(ngModel)]="filtroEstado"
+          (change)="filtrarEmpleados()"
+          class="w-32 text-blue-500 px-4 py-2 rounded-lg shadow-md bg-transparent"
+        >
+          <option value="">Todos</option>
+          <option value="true">Activos</option>
+          <option value="false">Inactivos</option>
+        </select>
+      </div>
+    </div>
+  </div>
+  <!-- Lista de empleados -->
+  <ion-list>
+    <ion-item
+      *ngFor="let empleado of empleados"
+      (click)="verEmpleado(empleado)"
+      class="cursor-pointer"
+    >
+      <ion-label>
+        <h2>{{ empleado.nombreCompleto }}</h2>
+        <p>{{ empleado.dni }} - {{ empleado.telefono }}</p>
+        <p>{{ empleado.estado ? 'Activo' : 'Inactivo' }}</p>
+      </ion-label>
+      <div class="flex gap-2">
+        <button
+          (click)="seleccionarEmpleado(empleado); $event.stopPropagation()"
+          class="text-amber-700 hover:bg-amber-500 font-medium hover:text-white px-4 py-2 rounded-lg transition duration-300 ease-in-out"
+        >
+          Editar
+        </button>
+        <button
+          (click)="eliminarEmpleado(empleado.id!); $event.stopPropagation()"
+          class="text-red-500 hover:bg-red-400 font-medium hover:text-white px-4 py-2 rounded-lg transition duration-300 ease-in-out"
+        >
+          Eliminar
+        </button>
+      </div>
+    </ion-item>
+  </ion-list>
+
+  <!-- Panel de detalles del empleado -->
+  <div
+    *ngIf="mostrarDatosEmpleado"
+    class="fixed inset-0 bg-gray-900 bg-opacity-50 flex justify-center items-center p-4"
+  >
+    <div class="bg-white rounded-xl shadow-xl p-6 w-full max-w-3xl relative">
+      <button
+        class="absolute top-2 right-2 text-gray-500 hover:text-gray-700"
+        (click)="cerrarDetallesEmpleado()"
+      >
+        ✖
+      </button>
+      <h1 class="text-2xl font-semibold mb-4">Detalles del Empleado</h1>
+      <p><strong>Nombre:</strong> {{ empleadoSeleccionado?.nombreCompleto }}</p>
+      <p><strong>DNI:</strong> {{ empleadoSeleccionado?.dni }}</p>
+      <p><strong>Teléfono:</strong> {{ empleadoSeleccionado?.telefono }}</p>
+      <p>
+        <strong>Estado:</strong>
+        {{ empleadoSeleccionado?.estado ? 'Activo' : 'Inactivo' }}
+      </p>
+    </div>
+  </div>
+
+  <!-- Formulario para agregar/editar empleados -->
+  <div *ngIf="desplegarFormulario" class="formulario">
+    <app-formulario-empleado
+      [empleado]="empleadoSeleccionado"
+      (cancelar)="cerrarFormulario()"
+    ></app-formulario-empleado>
+  </div>
+</ion-content>

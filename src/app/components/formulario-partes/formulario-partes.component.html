@@ -1,0 +1,114 @@
+<form
+  (ngSubmit)="guardarParte()"
+  class="p-6 bg-white rounded-lg shadow-md max-w-3xl mx-auto"
+>
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">   
+    <div>
+      <label class="block text-gray-700 text-sm font-bold mb-2"
+        >Empleado:</label
+      >
+      <ion-select
+        [(ngModel)]="parteForm.empleadoId"
+        name="empleadoId"
+        required
+        class="w-full"
+      >
+        <ion-select-option
+          *ngFor="let empleado of empleados"
+          [value]="empleado.id"
+        >
+          {{ empleado.nombreCompleto }}
+        </ion-select-option>
+      </ion-select>
+    </div>
+    <div>
+      <label class="block text-gray-700 text-sm font-bold mb-2">Cliente:</label>
+      <ion-input
+        type="text"
+        [(ngModel)]="parteForm.nombreCompletoCliente"
+        name="nombreCompletoCliente"
+        required
+        class="w-full border rounded-lg p-2 focus:ring focus:ring-blue-300"
+      >
+      </ion-input>
+    </div>    
+    <div>
+      <label class="block text-gray-700 text-sm font-bold mb-2">Obra:</label>
+      <ion-select
+        [(ngModel)]="parteForm.obraId"
+        name="obraId"
+        required
+        class="w-full"
+      >
+        <ion-select-option *ngFor="let obra of obras" [value]="obra.id">
+          {{ obra.titulo }}
+        </ion-select-option>
+      </ion-select>
+    </div>
+
+    <div>
+      <label class="block text-gray-700 text-sm font-bold mb-2">Horas:</label>
+      <ion-input
+        min="1"
+        type="number"
+        [(ngModel)]="parteForm.horas"
+        name="horas"
+        required
+        class="w-full border rounded-lg p-2 focus:ring focus:ring-blue-300"
+      ></ion-input>
+    </div>
+
+    <div>
+      <label class="block text-gray-700 text-sm font-bold mb-2"
+        >Concepto:</label
+      >
+      <ion-input
+        type="text"
+        [(ngModel)]="parteForm.concepto"
+        name="concepto"
+        required
+        class="w-full border rounded-lg p-2 focus:ring focus:ring-blue-300"
+      ></ion-input>
+    </div>
+
+    <div class="md:col-span-2">
+      <label class="block text-gray-700 text-sm font-bold mb-2"
+        >Observaciones:</label
+      >
+      <ion-textarea
+        [(ngModel)]="parteForm.observaciones"
+        name="observaciones"
+        class="w-full border rounded-lg p-2 focus:ring focus:ring-blue-300"
+      ></ion-textarea>
+    </div>
+
+    <div class="md:col-span-2 flex flex-col items-center">
+      <label class="block text-gray-700 text-sm font-bold mb-2">Fecha:</label>
+      <ion-datetime
+        [(ngModel)]="parteForm.fecha"
+        name="fecha"
+        presentation="date"
+        firstDayOfWeek="1"
+        required
+        class="w-full max-w-xs border rounded-lg p-2 focus:ring focus:ring-blue-300"
+      ></ion-datetime>
+    </div>
+  </div>
+
+  <!-- Botones -->
+  <div class="flex justify-evenly mt-6 space-x-4">
+    <ion-button
+      type="submit"
+      class="px-6 bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700"
+    >
+      {{ parteForm.id ? "Actualizar" : "Guardar" }}
+    </ion-button>
+    <ion-button
+      (click)="cancelarParte()"
+      color="none"
+      class="px-6 bg-red-600 text-white py-2 rounded-lg hover:bg-red-700"
+    >
+      Cancelar
+    </ion-button>
+  </div>
+</form>

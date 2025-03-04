@@ -14,8 +14,17 @@
     </ion-toolbar>
   </ion-header>
 
-  <div id="container">
-    <strong class="capitalize">{{ folder }}</strong>
-    <p>Explore <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+    <div *ngFor="let obra of obras">
+      <ion-card class="shadow-md rounded-lg p-4 mb-4">
+        <ion-card-header>
+          <ion-card-title>{{ obra.titulo }}</ion-card-title>
+          <ion-card-subtitle
+            >{{ obra.estado ? 'Activo' : 'Inactivo' }}</ion-card-subtitle
+          >
+        </ion-card-header>
+        <ion-card-content> {{ obra.direccion }} </ion-card-content>
+      </ion-card>
+    </div>
   </div>
 </ion-content>

@@ -1,0 +1,114 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large" class="font-semibold">Obras</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <!-- Buscador y botón de agregar -->
+  <!-- Buscador y botón de agregar (mantiene su posición arriba) -->
+<div class="p-4 flex justify-between items-center">
+  <ion-searchbar
+    [(ngModel)]="filtroConcepto"
+    (ionInput)="filtrarPartes()"
+    placeholder="Buscar concepto..."
+    class="shadow-md rounded-lg flex-1"
+  ></ion-searchbar>
+
+  <button
+    (click)="desplegarFormulario = !desplegarFormulario"
+    class="ml-4 text-blue-500 px-4 py-2 rounded-lg transition duration-300 ease-in-out hover:bg-blue-500 hover:text-white"
+  >
+    {{ desplegarFormulario ? 'Cerrar Formulario' : 'Agregar' }}
+  </button>
+</div>
+
+<!-- Sección de filtros en la parte inferior -->
+<div class="p-4 mt-4 bg-gray-100 rounded-lg shadow-md">
+  <h3 class="text-lg font-semibold mb-3 text-gray-700">Filtros</h3>
+
+  <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-4">
+    <!-- Filtro por fecha -->
+    <div class="flex flex-col">
+      <label class="text-gray-600 font-medium mb-2">Ordenar por Fecha:</label>
+      <select
+        [(ngModel)]="ordenFecha"
+        (change)="filtrarPartes()"
+        class="w-full text-blue-500 px-4 py-2 rounded-lg shadow-md bg-white"
+      >
+        <option value="asc">Ascendente</option>
+        <option value="desc">Descendente</option>
+      </select>
+    </div>
+
+    <!-- Filtro por obra -->
+    <div class="flex flex-col">
+      <label class="text-gray-600 font-medium mb-2">Filtrar por Obra:</label>
+      <select
+        [(ngModel)]="filtroObraId"
+        (change)="filtrarPartes()"
+        class="w-full text-blue-500 px-4 py-2 rounded-lg shadow-md bg-white"
+      >
+        <option value="">Todas</option>
+        <option *ngFor="let obra of obras" [value]="obra.id">
+          {{ obra.titulo }}
+        </option>
+      </select>
+    </div>
+  </div>
+</div>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-4">
+    <div
+      *ngFor="let parte of parteFiltrada"
+      class="bg-white shadow-lg rounded-xl p-4 flex flex-col space-y-2"
+    >
+      <h2 class="text-lg font-semibold text-gray-800">{{ parte.concepto }}</h2>
+      <p class="text-sm text-gray-600">
+        <strong>Cliente:</strong> {{ parte.nombreCompletoCliente }}
+      </p>
+      <p class="text-sm text-gray-600">
+        <strong>Observaciones:</strong> {{ parte.observaciones }}
+      </p>
+      <p class="text-sm text-gray-600">
+        <strong>Fecha:</strong> {{ parte.fecha | date:'dd/MM/yyyy' }}
+      </p>
+
+      <!-- Botones -->
+      <div class="flex justify-end space-x-2 mt-3">
+        <button
+          (click)="seleccionarParte(parte)"
+          class="text-amber-700 hover:bg-amber-500 font-medium hover:text-white px-4 py-2 rounded-lg transition duration-300 ease-in-out"
+        >
+          Editar
+        </button>
+        <button
+          (click)="eliminarParte(parte.id!)"
+          color="danger"
+          class="text-red-500 hover:bg-red-400 hover:text-white px-4 py-2 rounded-lg transition duration-300 ease-in-out"
+        >
+          Eliminar
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Formulario de Partes -->
+  <div
+    *ngIf="desplegarFormulario"
+    class="space-y-3 flex-1 overflow-y-auto top-1/2 left-1/2 fixed transform -translate-x-1/2 -translate-y-1/2 max-w-xl w-11/12 p-4 h-4/5 rounded-lg shadow-lg z-[100] bg-transparent"
+  >
+    <app-formulario-partes
+      [parte]="parteObraSeleccionada"
+      (cancelar)="cerrarPartesObra()"
+    ></app-formulario-partes>
+  </div>
+</ion-content>
